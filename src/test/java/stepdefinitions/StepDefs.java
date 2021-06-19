@@ -17,6 +17,11 @@ public class StepDefs extends CucumberConfig {
         requestHandler.buildRequest("auth");
     }
 
+    @Given("a request to close the session with the API")
+    public void aRequestToCloseTheSessionWithTheAPI() {
+        requestHandler.buildRequest("closeSession");
+    }
+
     @When("the request is sent")
     public void theRequestIsSent() {
     }
@@ -24,4 +29,10 @@ public class StepDefs extends CucumberConfig {
     @Then("I receive a key for future authentication")
     public void iReceiveAKeyForFutureAuthentication() {
     }
+
+    @Then("I receive confirmation the session has been closed")
+    public void iReceiveConfirmationTheSessionHasBeenClosed() {
+
+    }
+
 }
