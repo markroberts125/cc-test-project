@@ -20,7 +20,7 @@ public class Request {
     private static final String QUERY_PATH = "queryParams/";
     private static final String BODY_PATH = "body/";
 
-    private String name;
+    private final String name;
     private String endpoint;
     private String resource;
     private RequestMethod requestMethod;

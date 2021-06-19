@@ -6,19 +6,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
-import internal.request.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.ws.rs.core.Response.Status;
 
 public class Response {
 
     public static final Logger LOG = LoggerFactory.getLogger(Response.class);
 
-    private static final ObjectMapper MAPPER = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    private DocumentContext context;
+    private final DocumentContext context;
+    private final Status status;
 
-    public Response(int status, String body){
+    public Response(int statusCode, String body){
         context = JsonPath.parse(body);
+        this.status = Status.fromStatusCode(statusCode);
+    }
+
+    public Status getStatus(){
+        return status;
     }
 
     public String getBodyValue(String key){
