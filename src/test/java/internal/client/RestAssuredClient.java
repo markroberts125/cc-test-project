@@ -2,13 +2,13 @@ package internal.client;
 
 import internal.Response;
 import internal.request.Request;
+import internal.request.RequestMethod;
 import io.restassured.RestAssured;
 import io.restassured.config.LogConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.specification.RequestSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class RestAssuredClient implements Client {
         Map queryParameters = request.getQueryParameters();
 
         RequestSpecification requestSpec = given().relaxedHTTPSValidation().headers(requestHeaders).queryParams(queryParameters);
-        if (requestHeaders.get("ContentType") == "multipart/form-data") {
+        if (request.getRequestMethod()== RequestMethod.POST) {
             requestSpec.contentType("multipart/form-data");
             Set<String> keys = request.getBodyParameters().stringPropertyNames();
             for (String key : keys) {
@@ -49,11 +49,11 @@ public class RestAssuredClient implements Client {
             case POST -> requestSpec.post(request.getURL());
         };
 
-        if(request.isLoggingOut()){
+        if (request.isLoggingOut()) {
             LOG.info("Rest Assured Response:");
             restAssuredResponse.then().log().all();
         }
 
-        return null;
+        return new Response(restAssuredResponse.getStatusCode(),restAssuredResponse.body().asString());
     }
 }

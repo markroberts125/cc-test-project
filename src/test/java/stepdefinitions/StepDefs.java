@@ -24,6 +24,7 @@ public class StepDefs extends CucumberConfig {
 
     @When("the request is sent")
     public void theRequestIsSent() {
+        requestHandler.sendRequest();
     }
 
     @Then("I receive a key for future authentication")

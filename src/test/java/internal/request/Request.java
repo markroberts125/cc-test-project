@@ -41,6 +41,10 @@ public class Request {
         buildRequest(name);
     }
 
+    public String getName(){
+        return name;
+    }
+
     public String getURL() {
         return endpoint + resource;
     }
@@ -50,15 +54,21 @@ public class Request {
     }
 
     public Properties getHeaders(){
-        return headers;
+            return headers;
     }
 
     public Properties getQueryParameters(){
-        return queryParameters;
+        if(queryParameters != null) {
+            return queryParameters;
+        }
+        return new Properties();
     }
 
     public Properties getBodyParameters(){
-        return bodyParameters;
+        if(bodyParameters != null) {
+            return bodyParameters;
+        }
+        return new Properties();
     }
 
     public boolean isLoggingIn() {

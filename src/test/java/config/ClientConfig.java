@@ -1,6 +1,8 @@
 package config;
 
 import internal.RequestHandler;
+import internal.client.Client;
+import internal.client.RestAssuredClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +10,12 @@ import org.springframework.context.annotation.Configuration;
 public class ClientConfig {
 
     @Bean
-    RequestHandler requestHandler(){
-        return new RequestHandler();
+    Client client(){
+        return new RestAssuredClient();
+    }
+
+    @Bean(destroyMethod = "retireToken")
+    RequestHandler requestHandler(Client client){
+        return new RequestHandler(client);
     }
 }
