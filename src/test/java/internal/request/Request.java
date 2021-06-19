@@ -79,6 +79,14 @@ public class Request {
         return loggingOut;
     }
 
+    public void setBodyValue(String key, String value){
+        bodyParameters.setProperty(key, value);
+    }
+
+    public void setQueryParameter(String key, String value){
+        queryParameters.setProperty(key, value);
+    }
+
     private void buildRequest(String name){
         Properties details = getProperties(String.join("",REQUEST_PATH,DETAILS_PATH,name,".properties"));
         endpoint = details.getProperty("endpoint");
