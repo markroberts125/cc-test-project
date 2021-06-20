@@ -30,11 +30,21 @@ public class Request {
     private boolean loggingIn;
     private boolean loggingOut;
 
+    /**
+     * Constructor with no auth
+     *
+     * @param name String name used by the properties files
+     */
     public Request(String name){
         this.name = name;
         buildRequest(name);
     }
 
+    /**
+     * Constructor with an auth token, which is added to the headers
+     *
+     * @param name String name used by the properties files
+     */
     public Request(String name, String authKey){
         this.name = name;
         headers.put(AUTH_HEADER, authKey);
@@ -87,6 +97,13 @@ public class Request {
         queryParameters.setProperty(key, value);
     }
 
+    /**
+     * Build the request from the properties files stored in src/test/resources/requests with the provided name
+     * Initial data is pulled from the properties in /details then this is used to determine whether to add query
+     * parameters for GET, or body parameters for POST
+     *
+     * @param name String name used by the properties files
+     */
     private void buildRequest(String name){
         Properties details = getProperties(String.join("",REQUEST_PATH,DETAILS_PATH,name,".properties"));
         endpoint = details.getProperty("endpoint");
@@ -105,6 +122,12 @@ public class Request {
         }
     };
 
+    /**
+     * Retrieve the contents of a properties file from a provided path
+     *
+     * @param fileName file path of properties to be retrieved
+     * @return Contents of the stored properties file, or empty if no file exists
+     */
     private Properties getProperties(String fileName){
         Properties properties = new Properties();
         File propertiesFile = new File(fileName);

@@ -23,6 +23,12 @@ public class Response {
         return status;
     }
 
+    /**
+     * Retrieve a value based on the provided JsonPath
+     *
+     * @param key JsonPath of the value to be retrieved
+     * @return value found at the JsonPath provided, or null if that field does not exist
+     */
     public String getBodyValue(String key){
         try{
             return context.read(key).toString();

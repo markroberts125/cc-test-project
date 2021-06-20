@@ -20,10 +20,20 @@ public class RestAssuredClient implements Client {
 
     public static final Logger LOG = LoggerFactory.getLogger(RestAssuredClient.class);
 
+    /**
+     * Constructor. Additionally, blacklist the auth header from the logs
+     */
     public RestAssuredClient() {
         RestAssured.config = RestAssuredConfig.newConfig().logConfig(LogConfig.logConfig().blacklistHeader(AUTH_HEADER));
     }
 
+    /**
+     * Extracts the details stored within the generic request object and sends it to the provided API url.
+     * Converts the response provided into the generic response format.
+     *
+     * @param request Request object to be sent
+     * @return response object received
+     */
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
     public Response sendRequest(Request request) {
