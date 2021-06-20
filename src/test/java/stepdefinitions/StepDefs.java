@@ -5,7 +5,6 @@ import internal.RequestHandler;
 
 import javax.ws.rs.core.Response.Status;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -74,6 +73,6 @@ public class StepDefs extends CucumberConfig {
         float buyAmount = Integer.getInteger(requestHandler.getResponse().getBodyValue("client_buy_amount"));
         float sellAmount = Integer.getInteger(requestHandler.getResponse().getBodyValue("client_sell_amount"));
         float rate = Integer.getInteger(requestHandler.getResponse().getBodyValue("core_rate"));
-        assertEquals(buyAmount, (sellAmount / rate), 1);
+        assertEquals(buyAmount, (sellAmount * rate), 1);
     }
 }

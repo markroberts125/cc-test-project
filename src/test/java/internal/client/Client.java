@@ -5,5 +5,5 @@ import internal.request.Request;
 
 public interface Client {
 
-    public Response sendRequest(Request request);
+    Response sendRequest(Request request);
 }

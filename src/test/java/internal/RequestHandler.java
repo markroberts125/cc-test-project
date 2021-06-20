@@ -2,7 +2,6 @@ package internal;
 
 import internal.client.Client;
 import internal.request.Request;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static javax.ws.rs.core.Response.Status.OK;
 
