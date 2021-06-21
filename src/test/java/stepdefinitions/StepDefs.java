@@ -70,9 +70,9 @@ public class StepDefs extends CucumberConfig {
 
     @Then("the buy amount matches the provided rate")
     public void theBuyAmountMatchesTheProvidedRate() {
-        float buyAmount = Integer.getInteger(requestHandler.getResponse().getBodyValue("client_buy_amount"));
-        float sellAmount = Integer.getInteger(requestHandler.getResponse().getBodyValue("client_sell_amount"));
-        float rate = Integer.getInteger(requestHandler.getResponse().getBodyValue("core_rate"));
-        assertEquals(buyAmount, (sellAmount * rate), 1);
+        float buyAmount = Float.parseFloat(requestHandler.getResponse().getBodyValue("client_buy_amount"));
+        float sellAmount = Float.parseFloat(requestHandler.getResponse().getBodyValue("client_sell_amount"));
+        float rate = Float.parseFloat(requestHandler.getResponse().getBodyValue("core_rate"));
+        assertEquals(buyAmount, (sellAmount / rate), 1);
     }
 }
